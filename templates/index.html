@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpamShield · complete email guard</title>
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         body {
             background: #e9eff5;
-            background-image: 
-                radial-gradient(circle at 5% 20%, rgba(210, 230, 245, 0.5) 0%, transparent 28%),
-                radial-gradient(circle at 95% 75%, rgba(188, 212, 230, 0.5) 0%, transparent 32%);
             min-height: 100vh;
             padding: 2rem 1.2rem;
             display: flex;
@@ -29,145 +27,60 @@
             width: 100%;
             background: rgba(255,255,255,0.92);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border-radius: 44px;
             box-shadow: 0 30px 50px -20px rgba(0,30,50,0.35);
             padding: 2.4rem 2.2rem;
-            border: 1px solid rgba(255,255,255,0.7);
         }
 
-        .top-badge {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-        .title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .title h1 {
-            font-size: 2rem;
-            font-weight: 680;
-            background: linear-gradient(145deg, #0b3343, #1a5b6e);
-            /*-webkit-background-clip: text;*/
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.02em;
-        }
-        .version {
-            background: #1a4757;
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .stats {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.8rem;
-            background: #f2f8fd;
-            padding: 1rem 1.5rem;
-            border-radius: 28px;
-        }
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.85rem;
-            background: white;
-            padding: 0.25rem 1rem 0.25rem 0.8rem;
-            border-radius: 40px;
-            border: 1px solid #cde0ea;
-            color: #1d4e5f;
-        }
-
-        .email-header {
-            display: flex;
-            gap: 1.5rem;
-            background: #fafdff;
-            padding: 1rem 1.4rem;
-            border-radius: 24px;
-            margin-bottom: 1.2rem;
-            border: 1px solid #cde1ec;
-            flex-wrap: wrap;
-        }
-
-        .input-area {
+        .site-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0b3343;
             margin-bottom: 1.5rem;
         }
 
         .label-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             margin-bottom: 0.5rem;
         }
+
         .label-row span {
             font-weight: 600;
             color: #134b5a;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
+            font-size: 0.9rem;
         }
 
-        #emailInput {
+        textarea {
             width: 100%;
             padding: 1.2rem 1.5rem;
             font-size: 1rem;
             border: 2px solid #c6dae5;
-            background: white;
             border-radius: 28px;
-            outline: none;
             resize: vertical;
-            line-height: 1.6;
-            color: #042430;
-            font-weight: 420;
-            transition: 0.15s;
-            box-shadow: inset 0 3px 8px rgba(0,0,0,0.01);
+            min-height: 140px;
+            margin-bottom: 1.2rem;
         }
 
-        #emailInput:focus {
+        textarea:focus {
             border-color: #1d7e8c;
-            background: #ffffff;
-            box-shadow: 0 10px 20px -15px #1d7e8c, inset 0 1px 4px #b2e0ea;
+            outline: none;
         }
 
-        /* analysis grid */
-        .analysis-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.3fr;
-            gap: 1.5rem;
-            margin: 1.8rem 0 1.4rem;
+        button {
+            background: #12505e;
+            color: white;
+            border: none;
+            padding: 0.55rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 0.6rem;
         }
 
-        @media (max-width:700px) {
-            .analysis-grid { grid-template-columns: 1fr; }
-        }
-
-        .risk-card {
-            background: white;
-            border-radius: 28px;
-            padding: 1.4rem 1.4rem;
-            border: 1px solid #e0edf2;
-            box-shadow: 0 8px 20px -12px rgba(0,40,60,0.12);
-        }
-
-        .risk-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.9rem;
-        }
-        .risk-header span {
-            font-weight: 700;
-            color: #1a4d5e;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
+        button:hover {
+            background: #0d3c46;
         }
 
         .progress-lg {
@@ -175,14 +88,14 @@
             background: #e2ecf0;
             border-radius: 40px;
             overflow: hidden;
-            margin: 0.8rem 0 0.4rem;
+            margin: 1.2rem 0 0.6rem;
         }
+
         .progress-fill {
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, #2a95a8, #0d5e6b);
-            border-radius: 40px;
-            transition: width 0.2s;
+            transition: width 0.35s ease;
         }
 
         .spam-badge-large {
@@ -191,40 +104,33 @@
             display: flex;
             align-items: center;
             gap: 0.4rem;
+            margin: 0.6rem 0;
         }
 
-        .flag-section {
-            background: white;
-            border-radius: 28px;
-            padding: 1.4rem 1.4rem;
-            border: 1px solid #e0edf2;
-        }
-
-        .flag-categories {
-            max-height: 280px;
-            overflow-y: auto;
-            padding-right: 5px;
+        .clean-marker {
+            background: #e3f0ea;
+            color: #206255;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            margin-top: 0.6rem;
         }
 
         .category-group {
-            margin-bottom: 1.3rem;
+            margin-top: 1rem;
         }
 
         .category-title {
             font-size: 0.75rem;
             font-weight: 700;
-            color: #1a5e6b;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.6rem;
-            border-bottom: 1px dashed #bed6e0;
-            padding-bottom: 0.2rem;
+            color: #0e5b66;
+            margin-bottom: 0.4rem;
         }
 
         .flag-items {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.4rem 0.6rem;
+            gap: 0.4rem;
         }
 
         .flag-tag {
@@ -232,538 +138,211 @@
             color: #845d20;
             font-size: 0.7rem;
             font-weight: 600;
-            padding: 0.2rem 0.9rem;
+            padding: 0.25rem 0.9rem;
             border-radius: 30px;
-            border-left: 5px solid #d99c2b;
-            text-transform: lowercase;
-            display: inline-flex;
-            align-items: center;
-        }
-        .flag-tag::before {
-            content: "⚠️";
-            margin-right: 4px;
-            font-size: 0.65rem;
         }
 
-        .clean-marker {
-            background: #e3f0ea;
-            color: #206255;
-            padding: 0.4rem 1rem;
-            border-radius: 40px;
-            font-style: italic;
-            font-size: 0.8rem;
-        }
-
-        .report-footer {
-            background: #eff6fa;
-            border-radius: 22px;
-            padding: 1.2rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-
-        .test-pack {
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-        }
-
-        .test-btn {
-            background: white;
-            border: 1.5px solid #9bbacb;
-            padding: 0.4rem 1.1rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #12505e;
-            cursor: pointer;
-            transition: 0.07s;
-        }
-        .test-btn:hover {
-            background: #12505e;
-            color: white;
-            border-color: #12505e;
-        }
-
-        .clear-btn {
-            background: transparent;
-            border: 1px solid #a6c2cf;
-            padding: 0.4rem 1.3rem;
-            border-radius: 50px;
-            font-weight: 500;
-            color: #2d5d6e;
-            font-size: 0.75rem;
-            cursor: pointer;
-        }
-
-        .footer-note {
-            margin-top: 1.5rem;
-            text-align: right;
-            font-size: 0.65rem;
-            color: #517a8a;
-            border-top: 1px solid #cde0ec;
-            padding-top: 1rem;
+        #mainVerdictDescription {
+            margin-top: 0.4rem;
+            font-size: 0.9rem;
         }
     </style>
 </head>
+
 <body>
     <div class="shield">
-        <div class="top-badge">
-            <div class="title">
-                <span class="version">email fortress</span>
-            </div>
-            <div style="font-size:1.5rem;">📨🔍</div>
+
+        <div class="site-title">Spam Email Detector</div>
+
+        <div class="label-row">
+            <span>📄 Email Message</span>
+            <span id="charCounter">0 characters</span>
         </div>
 
-        <div class="stats">
-            <div class="stat-item"><span style="font-size:1.2rem;">🏷️</span> 35+ spam triggers</div>
-            <div class="stat-item"><span style="font-size:1.2rem;">⚡</span> real‑time</div>
-            <div class="stat-item"><span style="font-size:1.2rem;">🧠</span> obfuscated words (fr33, gu@rantee)</div>
+        <textarea id="emailInput" placeholder="Type or paste email content..."></textarea>
+
+        <button id="predictBtn">Predict Spam</button>
+        <button id="clearBtn">Clear</button>
+
+        <div class="progress-lg">
+            <div class="progress-fill" id="spamFill"></div>
         </div>
 
-        <!-- email context -->
-        <div class="email-header">
-            <span>📌 from: <strong style="color:#0a4352;">spam.candidate@fake.com</strong></span>
-            <span>🎯 to: <strong style="color:#0a4352;">inbox@secure.me</strong></span>
-            <span>🕒 subject: <strong id="subjectPreview">[scanning email body]</strong></span>
+        <div class="spam-badge-large">
+            <span id="verdictEmoji">—</span> 
+            <span id="verdictText"></span>
         </div>
 
-        <!-- MAIN INPUT -->
-        <div class="input-area">
-            <div class="label-row">
-                <span>📄 email message</span>
-                <span id="charCounter" style="background:#e4f0f5; padding:0.2rem 1rem; border-radius:40px;">0 characters</span>
-            </div>
-            <textarea id="emailInput" rows="5" placeholder="Type any email content... All spam categories are monitored: financial, urgency, too good to be true, obfuscated words (fr33, gu@rantee), ALL CAPS, excessive emojis, crypto, medical, adult, phishing... " spellcheck="false"></textarea>
-        </div>
+        <div id="mainVerdictDescription"></div>
 
-        <!-- COMPREHENSIVE SPAM ANALYSIS GRID -->
-        <div class="analysis-grid">
-            <!-- LEFT: SPAM RISK METER + VERDICT -->
-            <div class="risk-card">
-                <div class="risk-header">
-                    <span>📊 spam severity</span>
-                    <span id="riskLabel" style="background:#e1ecf0; padding:0.2rem 1rem; border-radius:40px;">low</span>
-                </div>
-                <div class="progress-lg">
-                    <div class="progress-fill" id="spamFill" style="width:0%;"></div>
-                </div>
-                <div style="display:flex; justify-content: space-between; margin:0.3rem 0 1.2rem; color:#2e6a7a; font-size:0.7rem;">
-                    <span>clean</span>
-                    <span>suspicious</span>
-                    <span>critical spam</span>
-                </div>
-                <div class="spam-badge-large">
-                    <span id="verdictEmoji">✅</span> <span id="verdictText" style="color:#12505e;">clean message</span>
-                </div>
-                <div style="margin-top:0.8rem; font-size:0.85rem; background:#f3f9fc; padding:0.7rem; border-radius:18px; border-left:5px solid #2b7a62;" id="mainVerdictDescription">
-                    🟢 No spam patterns detected.
-                </div>
-            </div>
-            <!-- RIGHT: FLAGS BY CATEGORY -->
-            <div class="flag-section">
-                <div style="display:flex; gap:0.7rem; align-items: center; margin-bottom:1.1rem;">
-                    <span style="font-size:1.3rem;">🚩</span>
-                    <span style="font-weight:700; color:#1d4e5f;">spam triggers — by category</span>
-                </div>
-                <div id="categoryContainer" class="flag-categories">
-                    <!-- dynamic categories from massive spam list -->
-                    <div class="clean-marker">✓ No spam keywords. Your email looks safe.</div>
-                </div>
-            </div>
-        </div>
+        <div id="categoryContainer"></div>
 
-        <!-- FOOTER REPORT + TEST BUTTONS -->
-        <div class="report-footer">
-            <div class="test-pack">
-                <span style="font-size:0.7rem; color:#2a6879; font-weight:600;">📋 SAMPLES:</span>
-                <span class="test-btn" id="sampleClean">📩 regular invoice</span>
-                <span class="test-btn" id="sampleFullSpam">💰 100% guaranty + winner</span>
-                <span class="test-btn" id="sampleObfuscated">🔣 fr33 m0ney, gu@rantee</span>
-                <span class="test-btn" id="sampleCrypto">₿ bitcoin profit</span>
-                <span class="test-btn" id="samplePhish">🔐 verify account</span>
-                <span class="clear-btn" id="clearBtn">✕ clear</span>
-            </div>
-        </div>
-        <div class="footer-note">
-            ⚙️ complete spam taxonomy · detects obfuscated l33t, excessive caps/emojis, 9 categories · built for email
-        </div>
     </div>
 
-    <script>
-        (function() {
-            "use strict";
+<script>
+(function() {
+"use strict";
 
-            // ---------- 🚩🚩🚩  FULL SPAM PATTERN LIBRARY — EMAIL FOCUS  ----------
-            // all categories from the spec: financial, urgency, too good true, marketing, trust, phishing, adult, medical, crypto, symbols/patterns, obfuscated, ALL CAPS, excessive emojis.
+/* 🔥 STRONG SPAM DETECTION */
 
-            // ----- 1. Financial / Money Triggers -----
-            const FINANCIAL = [
-                /\bfree\s*money\b/i, /\bearn\s*cash\b/i, /\bguaranteed\s*income\b/i, /\brisk[-\s]?free\b/i,
-                /\b100%\s*guarantee\b/i, /\bdouble\s*your\s*income\b/i, /\bmake\s*money\s*fast\b/i,
-                /\bmillion\s*dollars?\b/i, /\bextra\s*income\b/i, /\bno\s*investment\b/i,
-                /\b100%\s*guaranty\b/i, /\bguaranteed\s*approval\b/i
-            ];
+const PATTERNS = {
+    "💰 Financial / Money": [
+        /\bfree\b/i, /\bmoney\b/i, /\bcash\b/i,
+        /\bincome\b/i, /\bearn\b/i, /\bguarantee\b/i
+    ],
 
-            // ----- 2. Urgency / Pressure -----
-            const URGENCY = [
-                /\bact\s*now\b/i, /\blimited\s*time\b/i, /\bhurry\b/i, /\blast\s*chance\b/i,
-                /\boffer\s*expires\b/i, /\burgent\b/i, /\bimmediate\s*action\s*required\b/i,
-                /\bdon'?t\s*miss\s*out\b/i, /\btoday\s*only\b/i
-            ];
+    "⏳ Urgency / Pressure": [
+        /\burgent\b/i, /\bact now\b/i,
+        /\blimited\b/i, /\bimmediately\b/i
+    ],
 
-            // ----- 3. Too Good To Be True -----
-            const TOO_GOOD = [
-                /\bcongratulations?\s*winner\b/i, /\byou\s+have\s+won\b/i, /\bclaim\s*your\s*prize\b/i,
-                /\blottery\b/i, /\bjackpot\b/i, /\bfree\s*gift\b/i, /\bfree\s*reward\b/i,
-                /\bexclusive\s*deal\b/i, /\byou['']?re\s*a\s*winner\b/i, /\bselected.*winner\b/i
-            ];
+    "🎯 Prize / Lottery": [
+        /\bwinner\b/i, /\bwon\b/i,
+        /\bprize\b/i, /\blottery\b/i
+    ],
 
-            // ----- 4. Marketing / Sales Spam -----
-            const MARKETING = [
-                /\bbuy\s*now\b/i, /\bbest\s*price\b/i, /\bcheap\b/i, /\bdiscount\b/i,
-                /\bclearance\s*sale\b/i, /\bclick\s*here\b/i, /\border\s*now\b/i,
-                /\bspecial\s*promotion\b/i
-            ];
+    "🎣 Phishing / Scam": [
+        /\bverify\b/i, /\baccount\b/i,
+        /\bpassword\b/i, /\blogin\b/i
+    ],
 
-            // ----- 5. Suspicious Trust Builders -----
-            const TRUST = [
-                /\b100%\s*guarantee\b/i, /\bno\s*hidden\s*charges?\b/i, /\bcertified\b/i,
-                /\bpromis(?:e|ing)\b/i, /\bguaranteed\s*approval\b/i, /\bsafe\s*&\s*secure\b/i,
-                /\byou\s*are\s*guaranteed\b/i, /\b100%\s*guaranty\b/i
-            ];
+    "📢 Marketing / Promotion": [
+        /\bbuy\b/i, /\bdiscount\b/i,
+        /\boffer\b/i, /\bclick\b/i
+    ],
 
-            // ----- 6. Phishing / Scam Indicators -----
-            const PHISHING = [
-                /\bverify\s*your\s*account\b/i, /\bconfirm\s*password\b/i, /\blogin\s*immediately\b/i,
-                /\bbank\s*alert\b/i, /\bsecurity\s*notice\b/i, /\bupdate\s*payment\s*info\b/i,
-                /\bsuspicious\s*activity\b/i, /\bunusual\s*login\b/i, /\bclick\s*here\s*to\s*verify\b/i
-            ];
+    "₿ Crypto / Investment": [
+        /\bbitcoin\b/i, /\bcrypto\b/i,
+        /\binvestment\b/i
+    ],
 
-            // ----- 7. Adult / Sensitive Content -----
-            const ADULT = [
-                /\badult\b/i, /\bxxx\b/i, /\bdating\b/i, /\bhot\s*singles\b/i,
-                /\bnaughty\b/i, /\bmeet\s*tonight\b/i
-            ];
+    "💊 Medical / Health": [
+        /\bweight loss\b/i, /\bcure\b/i
+    ],
 
-            // ----- 8. Medical / Health Spam -----
-            const MEDICAL = [
-                /\bweight\s*loss\b/i, /\bmiracle\s*cure\b/i, /\bno\s*prescription\b/i,
-                /\blose\s*weight\s*fast\b/i, /\bcheap\s*meds?\b/i, /\bviagra\b/i,
-                /\bpharmacy\s*online\b/i
-            ];
+    "🔞 Adult / Sensitive": [
+        /\badult\b/i, /\bxxx\b/i
+    ],
 
-            // ----- 9. Crypto / Investment Spam -----
-            const CRYPTO = [
-                /\bbitcoin\s*profit\b/i, /\bcrypto\s*earnings?\b/i, /\binvestment\s*opportunity\b/i,
-                /\bhigh\s*returns?\b/i, /\bpassive\s*income\b/i, /\bget\s*rich\b/i,
-                /\bbitcoin\b/i, /\beth\b/i, /\bcryptocurrency\b/i
-            ];
+    "🧩 Obfuscated Spam": [
+        /\bfr33\b/i, /\bm0ney\b/i,
+        /\bgu@rantee\b/i
+    ]
+};
 
-            // ----- 10. Obfuscated words (l33t, symbols) -----
-            const OBFUSCATED = [
-                /\bfr33\b/i, /\bm0ney\b/i, /\bgu@rantee\b/i, /\bm0n3y\b/i, /\bfr[e3]{2}\s*m[o0]n[e3]y\b/i,
-                /\bfr[e3]{2}\b/i, /\bgu[a@]rante[ed]?\b/i, /\bc[a@]sh\b/i, /\bpr[i1]z[e3]\b/i,
-                /\bw[i1]nn[e3]r\b/i, /\bl[o0]tt[e3]ry\b/i, /\bcl[i1]ck\b/i, /\bfr[e3]e\b/i,
-                /\bm[o0]n[e3]y\b/i, /\bgu[a@]r[a@]nt[ei]\b/i
-            ];
+const inputEl = document.getElementById("emailInput");
+const charCounter = document.getElementById("charCounter");
+const spamFill = document.getElementById("spamFill");
+const verdictEmoji = document.getElementById("verdictEmoji");
+const verdictText = document.getElementById("verdictText");
+const verdictDesc = document.getElementById("mainVerdictDescription");
+const container = document.getElementById("categoryContainer");
 
-            // ----- 11. ALL CAPS (long words >=4 letters in caps) -----
-            // will detect via function
+function detectAllCaps(text) {
+    const caps = text.match(/\b[A-Z]{4,}\b/g);
+    return caps ? caps.length >= 2 : false;
+}
 
-            // ----- 12. Excessive emojis (3 or more from common spam set) -----
-            const EMOJI_REGEX = /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F900}-\u{1F9FF}\u{2702}-\u{27B0}\u{24C2}-\u{1F251}]/gu;
+function detectEmojiSpam(text) {
+    const emojis = text.match(/[\u{1F600}-\u{1F9FF}]/gu);
+    return emojis ? emojis.length >= 3 : false;
+}
 
-            // combine all into one collection with category names
-            const SPAM_CATEGORIES = [
-                { name: "💰 Financial / Money", patterns: FINANCIAL },
-                { name: "⏳ Urgency / Pressure", patterns: URGENCY },
-                { name: "🎯 Too Good To Be True", patterns: TOO_GOOD },
-                { name: "📢 Marketing / Sales", patterns: MARKETING },
-                { name: "🤝 Trust Builders", patterns: TRUST },
-                { name: "🎣 Phishing / Scam", patterns: PHISHING },
-                { name: "🔞 Adult / Sensitive", patterns: ADULT },
-                { name: "💊 Medical / Health", patterns: MEDICAL },
-                { name: "₿ Crypto / Investment", patterns: CRYPTO },
-                { name: "🧩 Obfuscated (l33t)", patterns: OBFUSCATED }
-            ];
+function scanEmail(text) {
+    let matches = {};
+    let score = 0;
+    let totalFlags = 0;
 
-            // DOM elements
-            const inputEl = document.getElementById('emailInput');
-            const charCounter = document.getElementById('charCounter');
-            const spamFill = document.getElementById('spamFill');
-            const riskLabel = document.getElementById('riskLabel');
-            const verdictEmoji = document.getElementById('verdictEmoji');
-            const verdictText = document.getElementById('verdictText');
-            const mainVerdictDesc = document.getElementById('mainVerdictDescription');
-            const categoryContainer = document.getElementById('categoryContainer');
-            const subjectPreview = document.getElementById('subjectPreview');
-
-            // buttons
-            const sampleClean = document.getElementById('sampleClean');
-            const sampleFullSpam = document.getElementById('sampleFullSpam');
-            const sampleObfuscated = document.getElementById('sampleObfuscated');
-            const sampleCrypto = document.getElementById('sampleCrypto');
-            const samplePhish = document.getElementById('samplePhish');
-            const clearBtn = document.getElementById('clearBtn');
-
-            // ----- UTILS: detect all caps (at least 3 uppercase words with length>=4) -----
-            function detectAllCaps(text) {
-                if (!text) return false;
-                const words = text.split(/\s+/);
-                let capsCount = 0;
-                for (let w of words) {
-                    if (w.length >= 4 && w === w.toUpperCase() && /[A-Z]{4,}/.test(w)) {
-                        capsCount++;
-                    }
-                }
-                return capsCount >= 2; // at least 2 all-caps words -> spam signal
+    Object.keys(PATTERNS).forEach(cat => {
+        matches[cat] = [];
+        PATTERNS[cat].forEach(p => {
+            if (p.test(text)) {
+                matches[cat].push(p.source);
+                score += 8;
+                totalFlags++;
             }
+        });
+    });
 
-            // ----- detect excessive emojis (>=3) -----
-            function countExcessiveEmojis(text) {
-                if (!text) return 0;
-                const matches = text.match(EMOJI_REGEX);
-                return matches ? matches.length : 0;
-            }
+    if (detectAllCaps(text)) {
+        matches["⚠️ ALL CAPS"] = ["Excessive capital words"];
+        score += 15;
+        totalFlags++;
+    }
 
-            // ----- MAIN SPAM SCAN -----
-            function scanEmail(text) {
-                if (!text || text.trim() === '') {
-                    return {
-                        isSpam: false,
-                        matchedByCategory: {},
-                        spamScore: 0,
-                        allCapsSpam: false,
-                        emojiCount: 0,
-                        excessiveEmojis: false,
-                        totalFlags: 0
-                    };
-                }
+    if (detectEmojiSpam(text)) {
+        matches["😲 Excessive Emojis"] = ["Too many emojis"];
+        score += 10;
+        totalFlags++;
+    }
 
-                let matchedCat = {};
-                // initialize categories
-                SPAM_CATEGORIES.forEach(cat => { matchedCat[cat.name] = []; });
+    score = Math.min(score, 100);
 
-                // test each category pattern
-                SPAM_CATEGORIES.forEach(cat => {
-                    cat.patterns.forEach(pattern => {
-                        if (pattern.test(text)) {
-                            // extract readable trigger (short)
-                            let trigger = pattern.source;
-                            if (trigger.length > 18) trigger = trigger.substring(0, 15) + '…';
-                            // store unique
-                            if (!matchedCat[cat.name].includes(trigger)) {
-                                matchedCat[cat.name].push(trigger);
-                            }
-                        }
-                    });
-                });
+    return {matches, score, totalFlags, isSpam: score >= 15};
+}
 
-                // all caps detection
-                const allCapsFlag = detectAllCaps(text);
-                if (allCapsFlag) {
-                    if (!matchedCat['⚠️ ALL CAPS']) {
-                        matchedCat['⚠️ ALL CAPS'] = ['EXCESSIVE CAPITALS'];
-                    } else {
-                        matchedCat['⚠️ ALL CAPS'].push('EXCESSIVE CAPITALS');
-                    }
-                }
+function renderAnalysis() {
+    const text = inputEl.value;
+    charCounter.textContent = text.length + " characters";
 
-                // excessive emojis
-                const emojiCount = countExcessiveEmojis(text);
-                const excessiveEmojis = emojiCount >= 3;
-                if (excessiveEmojis) {
-                    if (!matchedCat['😲 Excessive Emojis']) {
-                        matchedCat['😲 Excessive Emojis'] = [`${emojiCount} emojis`];
-                    } else {
-                        matchedCat['😲 Excessive Emojis'].push(`high emoji count`);
-                    }
-                }
+    const result = scanEmail(text);
+    spamFill.style.width = result.score + "%";
 
-                // total flags count
-                let totalFlagCount = 0;
-                Object.keys(matchedCat).forEach(key => { totalFlagCount += matchedCat[key].length; });
+    container.innerHTML = "";
 
-                // spam score: 0–100, based on number of categories hit + severity
-                let uniqueCategoriesHit = Object.keys(matchedCat).filter(k => matchedCat[k].length > 0).length;
-                let rawScore = uniqueCategoriesHit * 14 + totalFlagCount * 5;
-                if (allCapsFlag) rawScore += 12;
-                if (excessiveEmojis) rawScore += 10;
-                let spamScore = Math.min(Math.round(rawScore), 100);
-
-                let isSpam = (totalFlagCount > 0 || allCapsFlag || excessiveEmojis);  // any trigger -> spam
-
-                return {
-                    isSpam,
-                    matchedByCategory: matchedCat,
-                    spamScore,
-                    allCapsSpam: allCapsFlag,
-                    emojiCount,
-                    excessiveEmojis,
-                    totalFlags: totalFlagCount
-                };
-            }
-
-            // ---------- RENDER UI ----------
-            function renderAnalysis() {
-                const text = inputEl.value;
-                const analysis = scanEmail(text);
-
-                // char counter
-                charCounter.textContent = text.length + ' characters';
-
-                // subject preview
-                if (text.trim() === '') {
-                    subjectPreview.textContent = '[empty message]';
-                } else {
-                    let sub = text.split('\n')[0].substring(0, 35);
-                    subjectPreview.textContent = sub + (text.length > 35 ? '…' : '');
-                }
-
-                // progress bar and risk label
-                spamFill.style.width = analysis.spamScore + '%';
-                if (analysis.spamScore < 20) {
-                    riskLabel.textContent = 'low';
-                    riskLabel.style.background = '#e1ecf0';
-                    riskLabel.style.color = '#0c3f4f';
-                } else if (analysis.spamScore < 55) {
-                    riskLabel.textContent = 'medium';
-                    riskLabel.style.background = '#ffefc0';
-                    riskLabel.style.color = '#785e1a';
-                } else {
-                    riskLabel.textContent = 'high';
-                    riskLabel.style.background = '#ffd8cf';
-                    riskLabel.style.color = '#a1352a';
-                }
-
-                // verdict
-                if (analysis.isSpam) {
-                    verdictEmoji.textContent = '🚩';
-                    verdictText.textContent = 'SPAM DETECTED';
-                    mainVerdictDesc.style.borderLeftColor = '#ac3131';
-                    mainVerdictDesc.innerHTML = `🔴 <strong>Spam flagged</strong> — ${analysis.totalFlags} trigger${analysis.totalFlags!==1?'s':''} found. Includes financial, urgency, or suspicious patterns.`;
-                } else {
-                    verdictEmoji.textContent = '✅';
-                    verdictText.textContent = 'clean message';
-                    mainVerdictDesc.style.borderLeftColor = '#2b7a62';
-                    if (text.trim() === '') {
-                        mainVerdictDesc.innerHTML = '🟢 Email body is empty — no spam signals.';
-                    } else {
-                        mainVerdictDesc.innerHTML = '🟢 No spam patterns detected. This message looks legitimate.';
-                    }
-                }
-
-                // ---------- render categories with flags ----------
-                categoryContainer.innerHTML = '';
-                let catMap = analysis.matchedByCategory;
-                let hasAny = false;
-
-                // predefined order: show all categories that have flags
-                const allCategoryNames = [
-                    "💰 Financial / Money","⏳ Urgency / Pressure","🎯 Too Good To Be True","📢 Marketing / Sales",
-                    "🤝 Trust Builders","🎣 Phishing / Scam","🔞 Adult / Sensitive","💊 Medical / Health",
-                    "₿ Crypto / Investment","🧩 Obfuscated (l33t)","⚠️ ALL CAPS","😲 Excessive Emojis"
-                ];
-
-                allCategoryNames.forEach(catName => {
-                    let flags = catMap[catName] || [];
-                    if (flags.length > 0) {
-                        hasAny = true;
-                        let group = document.createElement('div');
-                        group.className = 'category-group';
-                        group.innerHTML = `<div class="category-title">${catName}</div>`;
-                        let flagWrap = document.createElement('div');
-                        flagWrap.className = 'flag-items';
-                        flags.slice(0,5).forEach(fl => {
-                            let tag = document.createElement('span');
-                            tag.className = 'flag-tag';
-                            tag.textContent = ' ' + fl.replace(/\\/g,'').substring(0,22); // cleanup
-                            flagWrap.appendChild(tag);
-                        });
-                        group.appendChild(flagWrap);
-                        categoryContainer.appendChild(group);
-                    }
-                });
-
-                // emoji extra inline
-                if (analysis.excessiveEmojis && !catMap['😲 Excessive Emojis']) {
-                    // but we already added; fallback
-                }
-
-                if (!hasAny) {
-                    let cleanDiv = document.createElement('div');
-                    cleanDiv.className = 'clean-marker';
-                    cleanDiv.textContent = '✓ No spam triggers across any category.';
-                    categoryContainer.appendChild(cleanDiv);
-                }
-            }
-
-            // input listeners
-            inputEl.addEventListener('input', renderAnalysis);
-            window.addEventListener('DOMContentLoaded', function() {
-                inputEl.value = 'Hi Jenna,\n\nPlease find the sales report attached. Let me know if you need any changes.\n\nThanks, Mark';
-                renderAnalysis();
-            });
-
-            // samples
-            sampleClean.addEventListener('click', function() {
-                inputEl.value = 'Subject: meeting tomorrow\n\nHi team, just a reminder about the 11am sync. Best regards, Olya.';
-                renderAnalysis();
-                inputEl.focus();
-            });
-
-            sampleFullSpam.addEventListener('click', function() {
-                inputEl.value = '100% GUARANTY! You are the WINNER of 1 MILLION DOLLARS. Claim your prize now. LIMITED TIME. ACT NOW!!!';
-                renderAnalysis();
-            });
-
-            sampleObfuscated.addEventListener('click', function() {
-                inputEl.value = 'Fr33 m0ney, gu@rantee income, no investment required. Clicк here: bitcoin profit.';
-                renderAnalysis();
-            });
-
-            sampleCrypto.addEventListener('click', function() {
-                inputEl.value = 'BITCOIN PROFIT — double your crypto earnings. High returns, passive income. Get rich fast! 🚀💰🚀💰';
-                renderAnalysis();
-            });
-
-            samplePhish.addEventListener('click', function() {
-                inputEl.value = 'URGENT: verify your account immediately. Suspicious activity detected. Confirm password now.';
-                renderAnalysis();
-            });
-
-            clearBtn.addEventListener('click', function() {
-                inputEl.value = '';
-                renderAnalysis();
-                inputEl.focus();
-            });
-
-            // extra: detect all caps and obfuscated inside renderAnalysis already.
-
-        })();
-    </script>
-
-    <!-- additional style for flags -->
-    <style>
-        .flag-tag {
-            background: #ffecdb;
-            border-left-color: #c57f2a;
-            word-break: break-word;
-            max-width: 100%;
+    if (result.isSpam) {
+        verdictEmoji.textContent = "🚩";
+        verdictText.textContent = "SPAM DETECTED";
+        verdictDesc.innerHTML =
+            `🔴 <strong>Spam flagged</strong> — ${result.totalFlags} indicator(s) detected.`;
+    } else {
+        verdictEmoji.textContent = "✅";
+        verdictText.textContent = "Clean Message";
+        verdictDesc.innerHTML = "🟢 No spam patterns detected.";
+        if (text.trim() !== "") {
+            container.innerHTML = "<div class='clean-marker'>✓ No spam triggers</div>";
         }
-        #emailInput {
-            min-height: 130px;
+    }
+
+    Object.keys(result.matches).forEach(cat => {
+        if (result.matches[cat]?.length > 0) {
+            const group = document.createElement("div");
+            group.className = "category-group";
+            group.innerHTML = `<div class="category-title">${cat}</div>`;
+            const wrap = document.createElement("div");
+            wrap.className = "flag-items";
+
+            result.matches[cat].forEach(flag => {
+                const tag = document.createElement("span");
+                tag.className = "flag-tag";
+                tag.textContent = flag;
+                wrap.appendChild(tag);
+            });
+
+            group.appendChild(wrap);
+            container.appendChild(group);
         }
-        .category-title {
-            color: #0e5b66;
-        }
-        .progress-fill {
-            background: linear-gradient(90deg, #257a8c, #0b4f5e);
-        }
-    </style>
+    });
+}
+
+document.getElementById("predictBtn").addEventListener("click", renderAnalysis);
+
+document.getElementById("clearBtn").addEventListener("click", () => {
+    inputEl.value = "";
+    spamFill.style.width = "0%";
+    verdictEmoji.textContent = "—";
+    verdictText.textContent = "";
+    verdictDesc.innerHTML = "";
+    container.innerHTML = "";
+    charCounter.textContent = "0 characters";
+});
+
+inputEl.addEventListener("input", () => {
+    charCounter.textContent = inputEl.value.length + " characters";
+});
+
+})();
+</script>
+
 </body>
 </html>
