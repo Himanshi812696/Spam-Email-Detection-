@@ -1,80 +1,232 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spam Email Detector</title>
-
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f6f2; /* Off-white */
-            text-align: center;
-            padding-top: 60px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #b8bed8 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        form {
+        .container {
             background: white;
-            display: inline-block;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.05em;
         }
 
         textarea {
-            width: 320px;
-            height: 120px;
-            padding: 10px;
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
             border-radius: 8px;
-            border: 1px solid #ccc;
-            resize: none;
-            font-size: 14px;
-            outline: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1em;
+            resize: vertical;
+            min-height: 150px;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         textarea:focus {
+            outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 5px rgba(102,126,234,0.4);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea::placeholder {
+            color: #999;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
         }
 
         button {
-            background-color: #667eea;
-            color: white;
+            flex: 1;
+            padding: 15px;
             border: none;
-            padding: 10px 20px;
-            font-size: 15px;
             border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s;
         }
 
-        button:hover {
-            background-color: #5a67d8;
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
         }
 
-        h3 {
-            margin-top: 25px;
-            color: #444;
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .clear-btn {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .clear-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: 600;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result.hidden {
+            display: none;
+        }
+
+        .result.spam {
+            background: #ffebee;
+            color: #c62828;
+            border-left: 5px solid #c62828;
+        }
+
+        .result.not-spam {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-left: 5px solid #2e7d32;
+        }
+
+        .result.error {
+            background: #fff3e0;
+            color: #e65100;
+            border-left: 5px solid #e65100;
+        }
+
+        .info-text {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            textarea {
+                min-height: 120px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
-
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Spam Detector</h1>
+        </div>
 
-    <h2>Spam Email Detector</h2>
+        <p class="info-text">Enter an email message to check if it's spam or legitimate.</p>
 
-    <form action="/predict" method="POST">
-        <textarea name="message" placeholder="Enter email text"></textarea>
-        <br><br>
-        <button type="submit">Predict</button>
-    </form>
+        <form action="/predict" method="POST" id="spamForm">
+            <div class="form-group">
+                <label for="message">Email Message</label>
+                <textarea 
+                    id="message" 
+                    name="message" 
+                    placeholder="Paste your email text here..."
+                ></textarea>
+            </div>
 
-    <h3>
-        {{ prediction_text }}
-    </h3>
+            <div class="button-group">
+                <button type="submit" class="submit-btn">🔍 Analyze</button>
+                <button type="button" class="clear-btn" id="clearBtn">Clear</button>
+            </div>
+        </form>
 
+        {% if prediction_text %}
+            <div class="result {% if 'NOT SPAM' in prediction_text %}not-spam{% elif 'SPAM' in prediction_text %}spam{% else %}error{% endif %}">
+                {{ prediction_text }}
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Clear button functionality
+        document.getElementById('clearBtn').addEventListener('click', function() {
+            document.getElementById('message').value = '';
+            document.getElementById('message').focus();
+        });
+
+        // Auto-scroll to result when form is submitted
+        document.getElementById('spamForm').addEventListener('submit', function() {
+            setTimeout(() => {
+                const result = document.querySelector('.result');
+                if (result) {
+                    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 100);
+        });
+    </script>
 </body>
 </html>
