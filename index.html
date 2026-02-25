@@ -1,100 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Spam Email Detector</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-        }
-
         body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f8f6f2;   /* Off-white background */
-        }
-
-        .container {
-            background: white;
-            width: 90%;
-            max-width: 500px;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            font-family: Arial, sans-serif;
+            background-color: #f8f6f2; /* Off-white */
             text-align: center;
+            padding-top: 60px;
         }
 
         h2 {
-            margin-bottom: 20px;
             color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background: white;
+            display: inline-block;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         textarea {
-            width: 100%;
+            width: 320px;
             height: 120px;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
             resize: none;
             font-size: 14px;
             outline: none;
-            transition: 0.3s;
         }
 
         textarea:focus {
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.15);
+            box-shadow: 0 0 5px rgba(102,126,234,0.4);
         }
 
         button {
-            margin-top: 15px;
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            background: #667eea;
+            background-color: #667eea;
             color: white;
-            font-size: 16px;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            border-radius: 8px;
             cursor: pointer;
             transition: 0.3s;
         }
 
         button:hover {
-            background: #5a67d8;
+            background-color: #5a67d8;
         }
 
-        .prediction {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
+        h3 {
+            margin-top: 25px;
             color: #444;
-            padding: 10px;
-            border-radius: 8px;
-            background: #f3f3f3;
         }
     </style>
 </head>
+
 <body>
 
-    <div class="container">
-        <h2>Spam Email Detector</h2>
+    <h2>Spam Email Detector</h2>
 
-        <form action="/predict" method="POST">
-            <textarea name="message" placeholder="Enter email text..."></textarea>
-            <button type="submit">Predict</button>
-        </form>
-            <div class="prediction">
-               
-            </div>
-       
-    </div>
+    <form action="/predict" method="POST">
+        <textarea name="message" placeholder="Enter email text"></textarea>
+        <br><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    <h3>
+        {{ prediction_text }}
+    </h3>
 
 </body>
 </html>
